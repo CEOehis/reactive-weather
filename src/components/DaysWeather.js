@@ -12,8 +12,8 @@ function DaysWeather(props) {
     <div className="weather-card">
       <p>{day.slice(0,3)}</p>
       <div className="icon" style={{backgroundImage: iconImgUrl, color: 'red'}}></div>
-      <div>{high}</div>
-      <div>{low}</div>
+      <div>{high}&deg;</div>
+      <div>{low}&deg;</div>
     </div>
   )
 }
