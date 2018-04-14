@@ -25,7 +25,7 @@ class App extends Component {
       timezone: '',
       currently: '',
       hourly: '',
-      daily: ''
+      daily: []
     }
   }
   componentDidMount() {
@@ -71,12 +71,12 @@ class App extends Component {
         timezone: res.timezone,
         currently: res.currently,
         hourly: res.hourly,
-        daily: res.daily
+        daily: res.daily.data
       })
     }).catch(e => console.error(e))
   }
   render() {
-    const { timezone, currently } = this.state;
+    const { timezone, currently, daily } = this.state;
 
     return (
       <div>
@@ -85,9 +85,9 @@ class App extends Component {
           <h3>{currently ? new Date(currently.time * 1000).toString() : '--:--'}</h3>
           <h3>{currently.summary}</h3>
           <div style={{backgroundImage: `url(${wind})`, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
-          <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently.temperature}&deg;F</h1>
+          <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently ?currently.temperature.toFixed(0): '--'}&deg;F</h1>
           <div className="week-weather">
-            {weeksWeather.map((weather,  i) =>
+            {daily.map((weather,  i) =>
               <DaysWeather key={i} {...weather} />
             )}
           </div>
