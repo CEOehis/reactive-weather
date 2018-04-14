@@ -15,15 +15,77 @@ const weeksWeather = [
 ]
 
 class App extends Component {
+  constructor() {
+    super();
+    this.getUserLocation = this.getUserLocation.bind(this);
+
+    this.state = {
+      lat: '',
+      long: '',
+      timezone: '',
+      currently: '',
+      hourly: '',
+      daily: ''
+    }
+  }
+  componentDidMount() {
+    this.getUserLocation();
+  }
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      console.log('started')
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          this.setState({
+            long: position.coords.longitude,
+            lat: position.coords.latitude
+          });
+          this.fetchWeatherData();
+        },
+        (e) => {
+          console.log(e);
+        },
+        // {
+        //   timeout: 20000,
+        // }
+      )
+    }
+  }
+
+  fetchWeatherData() {
+    console.log('i was called');
+    console.log(this);
+    const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/'; debugger;
+    console.log(this.state);
+    console.log(this.state.long);
+    const LAT = this.state.lat;
+    const LONG = this.state.long;
+    fetch(`${BASE_URL}${LAT},${LONG}?exclude=minutely,alerts,flags&extend=hourly`).then(res => {
+      console.log(res);
+      return res.json();
+    }).then(res => {
+      console.log(res);
+      this.setState({
+        timezone: res.timezone,
+        currently: res.currently,
+        hourly: res.hourly,
+        daily: res.daily
+      })
+    }).catch(e => console.error(e))
+  }
   render() {
+    const { timezone, currently } = this.state;
+
     return (
       <div>
         <Card className="app">
-          <h1>New York, Ny</h1>
-          <h3>Thu, 21 Jul, 2016 09:00 PM UTC</h3>
-          <h3>Windy</h3>
+          <h1>{timezone}</h1>
+          <h3>{currently ? new Date(currently.time * 1000).toString() : '--:--'}</h3>
+          <h3>{currently.summary}</h3>
           <div style={{backgroundImage: `url(${wind})`, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
-          <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>56&deg;F</h1>
+          <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently.temperature}&deg;F</h1>
           <div className="week-weather">
             {weeksWeather.map((weather,  i) =>
               <DaysWeather key={i} {...weather} />
