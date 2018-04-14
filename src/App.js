@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
 import DaysWeather from './components/DaysWeather';
 import Card from 'material-ui/Card';
 
@@ -18,7 +17,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <Card className="week-weather">
           {weeksWeather.map((weather,  i) =>
             <DaysWeather key={i} {...weather} />

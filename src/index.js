@@ -3,7 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from './components/Navbar';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+
+const AppRouting = () => (
+  <Router>
+    <div>
+      <Navbar />
+      <Route exact path="/" component={App} />
+    </div>
+  </Router>
+);
+
+ReactDOM.render(<AppRouting />, document.getElementById('root'));
 registerServiceWorker();
 if (module.hot) module.hot.accept();
