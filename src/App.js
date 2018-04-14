@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DaysWeather from './components/DaysWeather';
 import Card from 'material-ui/Card';
+import wind from './images/wind.png';
 
 const weeksWeather = [
   {day: 'Wednesday', weather: 'sunny', high: 78, low: 67},
@@ -17,10 +18,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Card className="week-weather">
-          {weeksWeather.map((weather,  i) =>
-            <DaysWeather key={i} {...weather} />
-          )}
+        <Card className="app">
+          <h1>New York, Ny</h1>
+          <h3>Thu, 21 Jul, 2016 09:00 PM UTC</h3>
+          <h3>Windy</h3>
+          <div style={{backgroundImage: `url(${wind})`, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
+          <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>56&deg;F</h1>
+          <div className="week-weather">
+            {weeksWeather.map((weather,  i) =>
+              <DaysWeather key={i} {...weather} />
+            )}
+          </div>
         </Card>
       </div>
     );

@@ -15,12 +15,12 @@ function DaysWeather(props) {
              weather === 'snowy' ? snow : wind
   var iconImgUrl = `url(${icon})`;
   return (
-    <Card className="weather-card">
+    <div className="weather-card">
       <p>{day.slice(0,3)}</p>
       <div className="icon" style={{backgroundImage: iconImgUrl, color: 'red'}}></div>
       <div className="temperature">{high}&deg;</div>
       <div className="temperature">{low}&deg;</div>
-    </Card>
+    </div>
   )
 }
 

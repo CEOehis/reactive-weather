@@ -1,8 +1,22 @@
 .week-weather {
   margin-left: 15px;
   margin-right: 15px;
-  margin-top: 50px;
   display: flex;
   padding-top: 20px;
-  padding-bottom: 50px;
+}
+
+.app {
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+h1, h3 {
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+* {
+  /* outline: 1px solid; */
 }
