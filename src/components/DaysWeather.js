@@ -1,14 +1,19 @@
 import React from 'react';
 import Card from 'material-ui/Card';
 import './DaysWeather.css';
+import clear from '../images/clear.png';
+import rain from '../images/rain.png';
+import cloudy from '../images/cloudy.png';
+import snow from '../images/snow.png';
+import wind from '../images/wind.png';
 
 function DaysWeather(props) {
   const { day, weather, high, low} = props
-  var icon = weather === 'sunny' ? 'clear.png' :
-             weather === 'rainy' ? 'rain.png' :
-             weather === 'cloudy' ? 'cloudy.png' :
-             weather === 'snowy' ? 'snow.png' : 'wind.png'
-  var iconImgUrl = `url("../images/${icon}")`;
+  var icon = weather === 'sunny' ? clear :
+             weather === 'rainy' ? rain :
+             weather === 'cloudy' ? cloudy :
+             weather === 'snowy' ? snow : wind
+  var iconImgUrl = `url(${icon})`;
   return (
     <Card className="weather-card">
       <p>{day.slice(0,3)}</p>
