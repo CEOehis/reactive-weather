@@ -13,6 +13,7 @@ const AppRouting = () => (
     <div>
       <Navbar />
       <Route exact path="/" component={App} />
+      {/* <Route path="/today/:id" component={TodaysWeather} /> */}
     </div>
   </Router>
 );
