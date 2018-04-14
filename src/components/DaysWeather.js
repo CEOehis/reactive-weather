@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'material-ui/Card';
 import './DaysWeather.css';
 
 function DaysWeather(props) {
@@ -9,12 +10,12 @@ function DaysWeather(props) {
              weather === 'snowy' ? 'snow.png' : 'wind.png'
   var iconImgUrl = `url("../images/${icon}")`;
   return (
-    <div className="weather-card">
+    <Card className="weather-card">
       <p>{day.slice(0,3)}</p>
       <div className="icon" style={{backgroundImage: iconImgUrl, color: 'red'}}></div>
-      <div>{high}&deg;</div>
-      <div>{low}&deg;</div>
-    </div>
+      <div className="temperature">{high}&deg;</div>
+      <div className="temperature">{low}&deg;</div>
+    </Card>
   )
 }
 
