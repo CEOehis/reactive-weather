@@ -57,7 +57,7 @@ class App extends Component {
   fetchWeatherData() {
     console.log('i was called');
     console.log(this);
-    const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/'; debugger;
+    const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/';
     console.log(this.state);
     console.log(this.state.long);
     const LAT = this.state.lat;
