@@ -10,7 +10,7 @@ import sleet from '../images/sleet.png';
 import partlyCloudy from '../images/partlyCloudy.png';
 import fog from '../images/fog.png';
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function DaysWeather(props) {
   const { time, icon, temperatureMax, temperatureMin} = props;
