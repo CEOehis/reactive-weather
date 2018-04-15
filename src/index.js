@@ -5,6 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
+import WeatherDetails from './components/WeatherDetails';
 
 
 
@@ -13,7 +14,7 @@ const AppRouting = () => (
     <div>
       <Navbar />
       <Route exact path="/" component={App} />
-      {/* <Route path="/today/:id" component={TodaysWeather} /> */}
+      <Route path="/details" component={WeatherDetails} />
     </div>
   </Router>
 );
