@@ -19,7 +19,6 @@ class App extends Component {
     super(props);
 
     this.showHourly = this.showHourly.bind(this);
-    this.logi = this.logi.bind(this);
   }
 
   showHourly (time) {
