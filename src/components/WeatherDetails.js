@@ -17,9 +17,26 @@ class WeatherDetails extends Component {
   }
 
   componentDidMount() {
-    fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/6.5243793,3.3792057,1523746800?exclude=currently,flags').then(res => {
-        console.log(res);
-        return res.json();
+    this.fetchHourlyData();
+    // fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/6.5243793,3.3792057,1523746800?exclude=currently,flags').then(res => {
+    //     console.log(res);
+    //     return res.json();
+    // }).then(res => {
+    //   console.log(res);
+    //   this.setState({
+    //     hourly: res.hourly.data
+    //   })
+    // })
+  }
+
+  fetchHourlyData() {
+    const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/';
+    const LAT = this.props.lat;
+    const LONG = this.props.long;
+    const DAY = 1523746800;
+    fetch(`${BASE_URL}${LAT},${LONG},${DAY}?exclude=currently,flags`).then(res => {
+      console.log(res);
+      return res.json();
     }).then(res => {
       console.log(res);
       this.setState({
