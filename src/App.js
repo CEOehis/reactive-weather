@@ -17,7 +17,15 @@ const weeksWeather = [
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.showHourly = this.showHourly.bind(this);
+    this.logi = this.logi.bind(this);
   }
+
+  showHourly (time) {
+    this.props.history.push(`/details/${time}`);
+  }
+
   render() {
     const { timezone, currently, daily } = this.props;
 
@@ -31,7 +39,7 @@ class App extends Component {
           <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently ?currently.temperature.toFixed(0): '--'}&deg;F</h1>
           <div className="week-weather">
             {daily.map((weather,  i) =>
-              <DaysWeather key={i} {...weather} />
+              <DaysWeather onWeatherClick={this.showHourly} key={i} {...weather} />
             )}
           </div>
         </Card>
