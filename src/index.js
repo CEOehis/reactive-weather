@@ -76,7 +76,7 @@ class AppRouting extends Component {
         <div>
           <Navbar />
           <Route exact path="/" render={(props) => <App {...props}  {...this.state} />} />
-          <Route path="/details" component={WeatherDetails} />
+          <Route path="/details/:time" render={(props) => <WeatherDetails {...props} {...this.state} />} />
         </div>
       </Router>
     )
