@@ -31,16 +31,17 @@ class WeatherDetails extends Component {
     }).then(res => {
       console.log(res);
       this.setState({
-        hourly: res.hourly.data
+        hourly: res.hourly.data,
+        today: res.daily.data[0]
       })
     })
   }
 
   render() {
-    const { hourly } = this.state;
+    const { hourly, today } = this.state;
     return (
       <Card className="details">
-        <h1>15th, January, 2018</h1>
+        <h1>{today ? new Date(today.time * 1000).toString() : '--:--'}</h1>
         <div style={{backgroundImage: `url(${wind})`, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
         <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>93&deg;F</h1>
         {/* <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently ?currently.temperature.toFixed(0): '--'}&deg;F</h1> */}
