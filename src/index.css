@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
+html {
+  height: 100%;
+  /* box-sizing: border-box; */
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,4 +12,38 @@ body {
   color: #918f8f;
   font-weight: 500;
   background: #ebebeb;
+}
+
+/* *,
+*:before,
+*:after {
+  box-sizing: inherit;
+} */
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+/**
+ * Footer Styles
+ */
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer a {
+  text-decoration: none;
+  color: #3F51B5;
 }

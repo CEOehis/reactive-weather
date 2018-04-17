@@ -77,6 +77,10 @@ class AppRouting extends Component {
           <Navbar />
           <Route exact path="/" render={(props) => <App {...props}  {...this.state} />} />
           <Route path="/details/:time" render={(props) => <WeatherDetails {...props} {...this.state} />} />
+          <footer class="footer">
+            <div>built by <a href="https://github.com/ceoehis" target="_blank"><strong>celestine</strong>.</a></div>
+            <div>view source code on <a href="github.com/CEOehis/reactive-weather" target="_blank"><strong>Github</strong>.</a></div>
+          </footer>
         </div>
       </Router>
     )
