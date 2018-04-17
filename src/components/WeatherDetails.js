@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import Card from 'material-ui/Card';
 import './WeatherDetails.css';
-import wind from '../images/wind.png';
 import SimpleTable from './HourlyTable';
+import clear from '../images/clear.png';
+import rain from '../images/rain.png';
+import cloudy from '../images/cloudy.png';
+import snow from '../images/snow.png';
+import wind from '../images/wind.png';
+import sleet from '../images/sleet.png';
+import partlyCloudy from '../images/partlyCloudy.png';
+import fog from '../images/fog.png';
 
 var data = [{id: 1, name: 'cy', calories: 'heh', fat: 'fatty', carbs: 'carby'}];
 
@@ -39,12 +46,43 @@ class WeatherDetails extends Component {
 
   render() {
     const { hourly, today } = this.state;
+    const icon = today.icon;
+    var iconImg;
+    switch (icon) {
+      case 'clear-day':
+      case 'clear-night':
+        iconImg = clear;
+        break;
+      case 'rain':
+        iconImg = rain;
+        break;
+      case 'sleet':
+        iconImg = sleet;
+      case 'fog':
+        iconImg = fog;
+        break;
+      case 'snow':
+        iconImg = snow;
+        break;
+      case 'cloudy':
+        iconImg = cloudy;
+        break;
+      case 'partly-cloudy-day':
+      case 'partly-cloudy-night':
+        iconImg = partlyCloudy;
+        break;
+      default:
+        iconImg = wind;
+    }
+
+    var iconImgUrl = `url(${iconImg})`;
     return (
       <Card className="details">
         <h1>{today ? new Date(today.time * 1000).toString() : '--:--'}</h1>
-        <div style={{backgroundImage: `url(${wind})`, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
-        <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>93&deg;F</h1>
-        {/* <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{currently ?currently.temperature.toFixed(0): '--'}&deg;F</h1> */}
+        <div>
+          <div style={{backgroundImage: iconImgUrl, width: '128px', height: '128px', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', display: 'inline-block'}}></div>
+          <h3 style={{display: 'inline-block', verticalAlign: 'top'}}>{today.summary}</h3>
+        </div>
         <h2>Hourly Forecast</h2>
         <SimpleTable data={hourly} />
       </Card>
