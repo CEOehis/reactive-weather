@@ -19,3 +19,10 @@ h1, h3 {
 * {
   /* outline: 1px solid; */
 }
+
+@media only screen and (max-width: 640px) {
+  .week-weather {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
