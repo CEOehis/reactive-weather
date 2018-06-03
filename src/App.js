@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import DaysWeather from './components/DaysWeather';
+import ErrorMessage from './components/ErrorMessage';
+import Loading from './components/Loading';
 import Card from 'material-ui/Card';
 import clear from './images/clear.png';
 import rain from './images/rain.png';
@@ -33,7 +35,14 @@ class App extends Component {
   }
 
   render() {
-    const { timezone, currently, daily } = this.props;
+    const {
+      timezone,
+      currently,
+      daily,
+      error,
+      isGettingUserLocation,
+      isFetchingWeather
+    } = this.props;
     const icon = currently.icon;
     var iconImg;
     switch (icon) {
@@ -64,6 +73,18 @@ class App extends Component {
     }
 
     var iconImgUrl = `url(${iconImg})`;
+
+    if(error.code) {
+      return <ErrorMessage error={error} />
+    }
+
+    if(isGettingUserLocation) {
+      return <Loading status={'your location'} />
+    }
+
+    if(isFetchingWeather) {
+      return <Loading status={'weather'} />
+    }
 
     return (
       <div>

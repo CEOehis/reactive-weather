@@ -20,10 +20,16 @@ class AppRouting extends Component {
       timezone: '',
       currently: '',
       hourly: '',
-      daily: []
+      daily: [],
+      error: {},
+      isGettingUserLocation: false,
+      isFetchingWeather: false
     }
   }
   componentDidMount() {
+    this.setState({
+      isGettingUserLocation: true
+    })
     this.getUserLocation();
   }
 
@@ -35,12 +41,17 @@ class AppRouting extends Component {
           console.log(position);
           this.setState({
             long: position.coords.longitude,
-            lat: position.coords.latitude
+            lat: position.coords.latitude,
+            isGettingUserLocation: false,
+            isFetchingWeather: true
           });
           this.fetchWeatherData();
         },
         (e) => {
           console.log(e);
+          this.setState({
+            error: e
+          })
         },
         // {
         //   timeout: 20000,
@@ -66,7 +77,8 @@ class AppRouting extends Component {
         timezone: res.timezone,
         currently: res.currently,
         hourly: res.hourly,
-        daily: res.daily.data
+        daily: res.daily.data,
+        isFetchingWeather: false
       })
     }).catch(e => console.error(e))
   }
@@ -77,9 +89,9 @@ class AppRouting extends Component {
           <Navbar />
           <Route exact path="/" render={(props) => <App {...props}  {...this.state} />} />
           <Route path="/details/:time" render={(props) => <WeatherDetails {...props} {...this.state} />} />
-          <footer class="footer">
+          <footer className="footer">
             <div>built by <a href="https://github.com/ceoehis" target="_blank"><strong>celestine</strong>.</a></div>
-            <div>view source code on <a href="github.com/CEOehis/reactive-weather" target="_blank"><strong>Github</strong>.</a></div>
+            <div>view source code on <a href="https://github.com/CEOehis/reactive-weather" target="_blank"><strong>Github</strong>.</a></div>
           </footer>
         </div>
       </Router>
