@@ -35,10 +35,8 @@ class AppRouting extends Component {
 
   getUserLocation() {
     if (navigator.geolocation) {
-      console.log('started')
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log(position);
           this.setState({
             long: position.coords.longitude,
             lat: position.coords.latitude,
@@ -48,31 +46,21 @@ class AppRouting extends Component {
           this.fetchWeatherData();
         },
         (e) => {
-          console.log(e);
           this.setState({
             error: e
           })
         },
-        // {
-        //   timeout: 20000,
-        // }
       )
     }
   }
 
   fetchWeatherData() {
-    console.log('i was called');
-    console.log(this);
     const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/e0477ed58041c8232d9f57dc2652536d/';
-    console.log(this.state);
-    console.log(this.state.long);
     const LAT = this.state.lat;
     const LONG = this.state.long;
     fetch(`${BASE_URL}${LAT},${LONG}?exclude=minutely,alerts,flags&extend=hourly`).then(res => {
-      console.log(res);
       return res.json();
     }).then(res => {
-      console.log(res);
       this.setState({
         timezone: res.timezone,
         currently: res.currently,
@@ -80,7 +68,9 @@ class AppRouting extends Component {
         daily: res.daily.data,
         isFetchingWeather: false
       })
-    }).catch(e => console.error(e))
+    }).catch(e => this.setState({
+      error: e
+    }))
   }
   render() {
     return (
@@ -90,8 +80,8 @@ class AppRouting extends Component {
           <Route exact path="/" render={(props) => <App {...props}  {...this.state} />} />
           <Route path="/details/:time" render={(props) => <WeatherDetails {...props} {...this.state} />} />
           <footer className="footer">
-            <div>built by <a href="https://github.com/ceoehis" target="_blank"><strong>celestine</strong>.</a></div>
-            <div>view source code on <a href="https://github.com/CEOehis/reactive-weather" target="_blank"><strong>Github</strong>.</a></div>
+            <div>built by <a href="https://github.com/ceoehis" target="_blank" rel="noopener noreferrer"><strong>celestine</strong>.</a></div>
+            <div>view source code on <a href="https://github.com/CEOehis/reactive-weather" target="_blank" rel="noopener noreferrer"><strong>Github</strong>.</a></div>
           </footer>
         </div>
       </Router>

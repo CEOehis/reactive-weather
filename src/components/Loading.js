@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
-import purple from 'material-ui/colors/purple';
 
 const styles = theme => ({
   location: {
@@ -25,7 +24,7 @@ function Loading(props) {
   const { classes, status } = props;
   return (
     <div className={classes.centered}>
-      <CircularProgress className={status == 'weather' ? classes.weather : classes.location} size={100} />
+      <CircularProgress className={status === 'weather' ? classes.weather : classes.location} size={100} />
       <h1>...fetching {status}</h1>
     </div>
   );

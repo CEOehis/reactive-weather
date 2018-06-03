@@ -11,8 +11,6 @@ import sleet from '../images/sleet.png';
 import partlyCloudy from '../images/partlyCloudy.png';
 import fog from '../images/fog.png';
 
-var data = [{id: 1, name: 'cy', calories: 'heh', fat: 'fatty', carbs: 'carby'}];
-
 class WeatherDetails extends Component {
   constructor(props) {
     super(props);

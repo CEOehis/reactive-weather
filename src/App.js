@@ -13,16 +13,6 @@ import sleet from './images/sleet.png';
 import partlyCloudy from './images/partlyCloudy.png';
 import fog from './images/fog.png';
 
-const weeksWeather = [
-  {day: 'Wednesday', weather: 'sunny', high: 78, low: 67},
-  {day: 'Thursday', weather: 'cloudy', high: 83, low: 66},
-  {day: 'Friday', weather: 'sunny', high: 75, low: 65},
-  {day: 'Saturday', weather: 'rainy', high: 78, low: 64},
-  {day: 'Sunday', weather: 'snowy', high: 77, low: 62},
-  {day: 'Monday', weather: 'rainy', high: 71, low: 61},
-  {day: 'Tuesday', weather: 'cloudy', high: 70, low: 60},
-]
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +64,7 @@ class App extends Component {
 
     var iconImgUrl = `url(${iconImg})`;
 
-    if(error.code) {
+    if(error.message) {
       return <ErrorMessage error={error} />
     }
 

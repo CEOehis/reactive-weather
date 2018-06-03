@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Card from 'material-ui/Card';
 import './DaysWeather.css';
 import clear from '../images/clear.png';
 import rain from '../images/rain.png';
