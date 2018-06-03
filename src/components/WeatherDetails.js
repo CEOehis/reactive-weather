@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Card from 'material-ui/Card';
+import ErrorMessage from './ErrorMessage';
+import Loading from './Loading';
 import './WeatherDetails.css';
 import SimpleTable from './HourlyTable';
 import clear from '../images/clear.png';
@@ -22,6 +24,9 @@ class WeatherDetails extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      isFetchingWeather: true
+    })
     this.fetchHourlyData();
   }
 
@@ -31,19 +36,20 @@ class WeatherDetails extends Component {
     const LONG = this.props.long;
     const DAY = this.props.match.params.time;
     fetch(`${BASE_URL}${LAT},${LONG},${DAY}?exclude=currently,flags`).then(res => {
-      console.log(res);
       return res.json();
     }).then(res => {
-      console.log(res);
       this.setState({
         hourly: res.hourly.data,
-        today: res.daily.data[0]
+        today: res.daily.data[0],
+        isFetchingWeather: false
       })
-    })
+    }).catch(e => this.setState({
+        error: e
+      }))
   }
 
   render() {
-    const { hourly, today } = this.state;
+    const { hourly, today, error, isFetchingWeather } = this.state;
     const icon = today.icon;
     var iconImg;
     switch (icon) {
@@ -74,6 +80,15 @@ class WeatherDetails extends Component {
     }
 
     var iconImgUrl = `url(${iconImg})`;
+
+    if(error && error.message) {
+      return <ErrorMessage error={error} />
+    }
+
+    if(isFetchingWeather) {
+      return <Loading status={'weather'} />
+    }
+
     return (
       <Card className="details">
         <h1>{today ? new Date(today.time * 1000).toString() : '--:--'}</h1>
