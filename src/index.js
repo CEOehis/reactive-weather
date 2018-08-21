@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import WeatherDetails from './components/WeatherDetails';
+import Footer from './components/Footer';
 
 
 
@@ -79,10 +80,7 @@ class AppRouting extends Component {
           <Navbar />
           <Route exact path="/" render={(props) => <App {...props}  {...this.state} />} />
           <Route path="/details/:time" render={(props) => <WeatherDetails {...props} {...this.state} />} />
-          <footer className="footer">
-            <div>built by <a href="https://github.com/ceoehis" target="_blank" rel="noopener noreferrer"><strong>celestine</strong>.</a></div>
-            <div>view source code on <a href="https://github.com/CEOehis/reactive-weather" target="_blank" rel="noopener noreferrer"><strong>Github</strong>.</a></div>
-          </footer>
+          <Footer />
         </div>
       </Router>
     )
