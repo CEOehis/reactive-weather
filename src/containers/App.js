@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import DaysWeather from './components/DaysWeather';
-import ErrorMessage from './components/ErrorMessage';
-import Loading from './components/Loading';
+import DaysWeather from '../components/DaysWeather';
+import ErrorMessage from '../components/ErrorMessage';
+import Loading from '../components/Loading';
 import Card from 'material-ui/Card';
-import clear from './images/clear.png';
-import rain from './images/rain.png';
-import cloudy from './images/cloudy.png';
-import snow from './images/snow.png';
-import wind from './images/wind.png';
-import sleet from './images/sleet.png';
-import partlyCloudy from './images/partlyCloudy.png';
-import fog from './images/fog.png';
+import clear from '../images/clear.png';
+import rain from '../images/rain.png';
+import cloudy from '../images/cloudy.png';
+import snow from '../images/snow.png';
+import wind from '../images/wind.png';
+import sleet from '../images/sleet.png';
+import partlyCloudy from '../images/partlyCloudy.png';
+import fog from '../images/fog.png';
 
 class App extends Component {
   constructor(props) {
