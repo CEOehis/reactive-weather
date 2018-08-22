@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import AppRouting from './containers/AppRouting';
@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 
 const domRootNode = document.getElementById('root');
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     <AppRouting />
   </Provider>,
