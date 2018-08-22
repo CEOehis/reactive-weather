@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 import DaysWeather from '../components/DaysWeather';
 import ErrorMessage from '../components/ErrorMessage';
@@ -13,7 +14,8 @@ import sleet from '../images/sleet.png';
 import partlyCloudy from '../images/partlyCloudy.png';
 import fog from '../images/fog.png';
 
-class App extends Component {
+
+export class App extends Component {
   constructor(props) {
     super(props);
 
@@ -95,4 +97,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isGettingUserLocation: state.location.isGettingUserLocation,
+    isFetchingWeather: state.location.isFetchingWeather,
+    timezone: state.weather.timezone,
+    currently: state.weather.currently,
+    daily: state.weather.daily,
+    error: state.weather.error,
+  }
+}
+
+export default connect(mapStateToProps)(App);

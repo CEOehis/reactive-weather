@@ -24,7 +24,10 @@ function Loading(props) {
   const { classes, status } = props;
   return (
     <div className={classes.centered}>
-      <CircularProgress className={status === 'weather' ? classes.weather : classes.location} size={100} />
+      <CircularProgress
+        className={status === 'weather' ? classes.weather : classes.location}
+        size={100}
+      />
       <h1>...fetching {status}</h1>
     </div>
   );
@@ -32,6 +35,7 @@ function Loading(props) {
 
 Loading.propTypes = {
   classes: PropTypes.object.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(Loading);

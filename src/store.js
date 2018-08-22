@@ -1,18 +1,11 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 
-const initialState = {
+import rootReducer from './reducers';
 
-}
-
-const myReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SOME_ACTION':
-      return state;
-    default:
-      return state;
-  }
-}
-
-const store = createStore(myReducer);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger),
+);
 
 export default store;
