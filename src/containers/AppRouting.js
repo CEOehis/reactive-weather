@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import WeatherDetails from '../components/WeatherDetails';
 import App from './App';
 import Footer from '../components/Footer';
-import getUserLocation, { getUserLocationSuccess } from '../actions/getUserLocation';
+import getUserLocation, { getUserLocationSuccess, getUserLocationError } from '../actions/getUserLocation';
 import setUserLocation from '../actions/setUserLocation';
 import fetchWeatherData, {
   fetchWeatherDataSuccess
@@ -69,6 +69,7 @@ const mapStateToProps = (state) => {
   return {
     lat: state.location.lat,
     long: state.location.long,
+    error: state.location.error
   }
 }
 
@@ -89,9 +90,8 @@ const mapDispatchToProps = (dispatch) => {
             });
           },
           (e) => {
-            this.setState({
-              error: e
-            })
+            // error obtaining user location
+            dispatch(getUserLocationError(e));
           },
         )
       }

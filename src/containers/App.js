@@ -104,7 +104,7 @@ const mapStateToProps = (state) => {
     timezone: state.weather.timezone,
     currently: state.weather.currently,
     daily: state.weather.daily,
-    error: state.weather.error,
+    error: state.location.error,
   }
 }
 

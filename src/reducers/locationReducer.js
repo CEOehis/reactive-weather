@@ -2,7 +2,8 @@ import {
   GET_USER_LOCATION,
   GET_USER_LOCATION_SUCCESS,
   SET_USER_LOCATION,
-  FETCH_WEATHER_DATA_SUCCESS
+  FETCH_WEATHER_DATA_SUCCESS,
+  GET_USER_LOCATION_ERROR
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   long: '',
   isGettingUserLocation: false,
   isFetchingWeather: false,
+  error: {}
 }
 
 const locationReducer = (state = initialState, action) => {
@@ -24,6 +26,11 @@ const locationReducer = (state = initialState, action) => {
         ...state,
         isGettingUserLocation: false,
         isFetchingWeather: true,
+      }
+    case GET_USER_LOCATION_ERROR:
+      return {
+        ...state,
+        error: action.error,
       }
     case SET_USER_LOCATION:
       return {
