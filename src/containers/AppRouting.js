@@ -1,20 +1,20 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect } from 'react-redux';
-
-import Navbar from '../components/Navbar';
-import WeatherDetails from '../components/WeatherDetails';
-import App from './App';
-import Footer from '../components/Footer';
-import setUserLocation from '../actions/setUserLocation';
-import { fetchWeather } from '../utils/api';
-import getUserLocation, {
-  getUserLocationSuccess,
-  getUserLocationError
-} from '../actions/getUserLocation';
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import fetchWeatherData, {
   fetchWeatherDataSuccess
 } from '../actions/fetchWeatherData';
+import getUserLocation, {
+  getUserLocationError,
+  getUserLocationSuccess
+} from '../actions/getUserLocation';
+
+import App from './App';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import WeatherDetails from '../components/WeatherDetails';
+import { connect } from 'react-redux';
+import { fetchWeather } from '../utils/api';
+import setUserLocation from '../actions/setUserLocation';
 
 export class AppRouting extends Component {
   constructor(props) {
@@ -47,24 +47,7 @@ export class AppRouting extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserLocation(nextAction) {
-      dispatch(getUserLocation())
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { longitude, latitude } = position.coords;
-            dispatch(getUserLocationSuccess());
-            dispatch(setUserLocation({lat: latitude, long: longitude}));
-            nextAction(latitude, longitude).then((data) => {
-              dispatch(fetchWeatherDataSuccess())
-              dispatch(fetchWeatherData(data))
-            });
-          },
-          (e) => {
-            // error obtaining user location
-            dispatch(getUserLocationError(e));
-          },
-        )
-      }
+      dispatch(getUserLocation(nextAction))
     }
   }
 }
