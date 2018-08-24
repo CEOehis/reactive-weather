@@ -3,18 +3,13 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import fetchWeatherData, {
   fetchWeatherDataSuccess
 } from '../actions/fetchWeatherData';
-import getUserLocation, {
-  getUserLocationError,
-  getUserLocationSuccess
-} from '../actions/getUserLocation';
 
 import App from './App';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import WeatherDetails from '../components/WeatherDetails';
 import { connect } from 'react-redux';
-import { fetchWeather } from '../utils/api';
-import setUserLocation from '../actions/setUserLocation';
+import getUserLocation from '../actions/getUserLocation';
 
 export class AppRouting extends Component {
   constructor(props) {
@@ -22,7 +17,7 @@ export class AppRouting extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserLocation(fetchWeather);
+    this.props.getUserLocation();
   }
 
   render() {
@@ -46,8 +41,8 @@ export class AppRouting extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserLocation(nextAction) {
-      dispatch(getUserLocation(nextAction))
+    getUserLocation() {
+      dispatch(getUserLocation())
     }
   }
 }
