@@ -5,26 +5,24 @@ import {
 } from "./actionTypes";
 
 import { fetchUserWeather } from "./fetchWeatherData";
+import { getCurrentPosition } from "../utils/api";
 import setUserLocation from "./setUserLocation";
 
 const getUserLocation = () => {
   return (dispatch) => {
     // do network request for getting user location here
     dispatch({ type: GET_USER_LOCATION }); // signal start of location finding
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          dispatch(getUserLocationSuccess());
-          const { longitude, latitude } = position.coords;
-          dispatch(setUserLocation({lat: latitude, long: longitude}));
-          dispatch(fetchUserWeather(latitude, longitude));
-        },
-        (e) => {
-          // error obtaining user location
-          dispatch(getUserLocationError(e));
-        },
-      )
-    }
+    getCurrentPosition()
+      .then((position) => {
+        dispatch(getUserLocationSuccess());
+        const { longitude, latitude } = position.coords;
+        dispatch(setUserLocation({lat: latitude, long: longitude}));
+        dispatch(fetchUserWeather(latitude, longitude));
+      })
+      .catch((error) => {
+        // error obtaining user location
+        dispatch(getUserLocationError(error));
+      });
   }
 }
 

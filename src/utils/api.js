@@ -6,3 +6,13 @@ export const fetchWeather = (lat, long) => {
     return res;
   }).catch(e => console.log(e))
 };
+
+export const getCurrentPosition = () => {
+  if (navigator.geolocation) {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  } else {
+    return new Promise.reject('geolocation is not available on this device');
+  }
+}
